@@ -39,7 +39,12 @@ test2 = cond true bool true false
 test3 : bool
 test3 = cond3 two bool false true false
 
+and : Type -> Type -> Type
+and = \p. \q. (c : Type) -> (p -> q -> c) -> c
 
+conj : (p : Type) -> (q : Type) -> p -> q -> and p q
+conj = \p. \q. \a. \b. \c. \f. f a b  
 
-
+proj1 : (p : Type) -> (q : Type) -> and p q -> p
+proj1 = \p. \q. \a. a p (\x. \y. x)
 
