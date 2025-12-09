@@ -1,0 +1,13 @@
+module Peano where
+
+Nat : Type 
+Nat = (x : Type) -> x -> (x -> x) -> x
+
+zero : Nat
+zero = \t. \v. \s. v
+
+succ : Nat -> Nat
+succ = \n. \t. \v. \s. s (n t v s) 
+
+add : Nat -> Nat -> Nat
+add = \a. \b. \t. \z. \s. a t (b t z s) s
