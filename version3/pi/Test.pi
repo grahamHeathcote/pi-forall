@@ -1,44 +1,5 @@
 module Test where
 
-id : (x : Type) -> (y: x) -> x
-id = \x. \y. y
-
-bool : Type
-bool = (x : Type) -> x -> x -> x
-
-true : bool
-true = \x. \y. \z. y
-
-false : bool
-false = \x. \y. \z. z
-
-cond : bool -> (x : Type) -> x -> x -> x
-cond = \b. b
-
-trip : Type
-trip = (x : Type) -> x -> x -> x -> x
-
-one : trip
-one = \x. \a. \b. \c. a 
-
-two : trip
-two = \x. \a. \b. \c. b 
-
-three : trip
-three = \x. \a. \b. \c. c
-
-cond3 : trip -> (x : Type) -> x -> x -> x -> x  
-cond3 = \t. t
-
-test : Type
-test = id Type Type
-
-test2 : bool
-test2 = cond true bool true false
-
-test3 : bool
-test3 = cond3 two bool false true false
-
 and : Type -> Type -> Type
 and = \p. \q. (c : Type) -> (p -> q -> c) -> c
 
@@ -47,4 +8,13 @@ conj = \p. \q. \a. \b. \c. \f. f a b
 
 proj1 : (p : Type) -> (q : Type) -> and p q -> p
 proj1 = \p. \q. \a. a p (\x. \y. x)
+
+proj2 : (p : Type) -> (q : Type) -> and p q -> q
+proj2 = \p. \q. \a. a q (\x. \y. y)
+
+aCom : (p : Type) -> (q : Type) -> and p q -> and q p
+aCom = \p. \q. \a. conj q p  (proj2 p q a) (proj1 p q a)
+
+aTran : (p : Type) -> (q : Type) -> and (and p q) p -> and p (and q p) 
+aTran = \p. \q. \a. conj p (and q p) (proj2 (and p q) p a) (conj q p (proj2 p q (proj1 (and p q ) p a)) (proj2 (and p q) p a))
 
