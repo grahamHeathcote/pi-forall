@@ -1,0 +1,45 @@
+module Test where
+
+id : (x : Type) -> (y: x) -> x
+id = \x. \y. y
+
+bool : Type
+bool = (x : Type) -> x -> x -> x
+
+true : bool
+true = \x. \y. \z. y
+
+false : bool
+false = \x. \y. \z. z
+
+cond : bool -> (x : Type) -> x -> x -> x
+cond = \b. b
+
+trip : Type
+trip = (x : Type) -> x -> x -> x -> x
+
+one : trip
+one = \x. \a. \b. \c. a 
+
+two : trip
+two = \x. \a. \b. \c. b 
+
+three : trip
+three = \x. \a. \b. \c. c
+
+cond3 : trip -> (x : Type) -> x -> x -> x -> x  
+cond3 = \t. t
+
+test : Type
+test = id Type Type
+
+test2 : bool
+test2 = cond true bool true false
+
+test3 : bool
+test3 = cond3 two bool false true false
+
+
+
+
+
