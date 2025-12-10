@@ -26,12 +26,12 @@ test0 : plus one one = two
 test0 = Refl
 
 test1 : plus one two = three
-test1 = TRUSTME  -- replace with Refl
+test1 = Refl
 
 spec0 : (n : nat) -> plus z n = n
-spec0 = \n . Refl
+spec0 = \n. Refl
 
 spec1 : (n : nat) -> (m : nat) -> plus (s n) m  = s (plus n m)
-spec1 = \n m . Refl
+spec1 = \n. \m. Refl
 
 
