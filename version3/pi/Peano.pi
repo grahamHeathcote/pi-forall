@@ -14,3 +14,19 @@ add = \a. \b. \t. \z. \s. a t (b t z s) s
 
 mult : Nat -> Nat -> Nat
 mult =  \a. \b. \t. \z. \s. a t z (\x. b t x s)
+
+bool : Type
+bool = (x : Type) -> x -> x -> x  
+
+true : bool
+true = \x. \y. \z. y
+
+false : bool
+false = \x. \y. \z. z
+
+cond : bool -> (x : Type) -> x -> x -> x 
+cond = \b. b
+
+testCond : bool 
+testCond = cond true bool true false
+ 

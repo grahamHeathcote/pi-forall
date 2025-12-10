@@ -1,0 +1,14 @@
+module Maybe where
+
+two : Type
+two = (x : Type) -> (A : Type) -> (A -> X) -> x -> x
+
+left : two -> two
+left = \a. \b. \c. b
+
+right : two
+right = \a. \b. \c. c
+
+
+
+
