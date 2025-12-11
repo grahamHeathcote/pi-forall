@@ -63,9 +63,17 @@ mapMaybe = \n.
 				Zero -> Just True
 				Succ n -> Just False
 
-
-				
-
-
+mmTest : Maybe Bool
+mmTest = mapMaybe JustZero
 
 
+
+data Special (A : Type) : Type where
+	special of (n : A) [A = Nat] [n = Succ Zero]
+
+
+
+specialTest : Special Nat
+specialTest = special (Succ Zero)
+
+ 
