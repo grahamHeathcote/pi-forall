@@ -37,4 +37,35 @@ greaterThan = \n. \m.
 				Zero -> True
 				Succ pm -> greaterThan pn pm
 
+map : (n : Nat) -> Bool
+map = \n.
+	case n of 
+		Zero -> True
+		Succ p -> False
+
+
+
+
+data Maybe (A : Type) : Type where
+	Nothing
+	Just of (A)
+
+JustZero : Maybe Nat
+JustZero = Just Zero
+
+
+mapMaybe : (n : Maybe Nat) -> (Maybe Bool)
+mapMaybe = \n.
+	case n of
+		Nothing -> Nothing
+		Just x ->
+			case x of
+				Zero -> Just True
+				Succ n -> Just False
+
+
+				
+
+
+
 
