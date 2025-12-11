@@ -1,0 +1,59 @@
+module Graham where
+import Nat
+
+
+id : (A : Type) -> A -> A
+id = \A. \x. x
+
+-- Todo: Apply id to itself
+
+bool : Type
+bool = (x : Type) -> x -> x -> x
+
+true : bool
+true = \a. \b. \c. b
+ 
+false : bool
+false = \a. \b. \c. c
+
+cond : (bool) -> (x : Type) -> x -> x -> x
+cond = \b. b
+
+and : Type -> Type -> Type
+and = \A. \B. (C : Type) -> (A -> B -> C) -> C
+
+cons : (A : Type) -> (B : Type) -> A -> B -> and A B
+cons = \x. \y. \a. \b. \c. \f. f a b 
+
+plus_0_n : (n : Nat) -> plus 0 n = n
+plus_0_n = \n. Refl
+
+
+data Vec (A : Type) (n : Nat) :  Type where 
+	Nil of [n = 0]
+	Cons of [m : Nat] [n = Succ m] (A) (Vec A m)
+
+PairVec : Type -> Type
+PairVec = \A. {n : Nat | Vec A n}
+
+PairEx : PairVec Nat
+PairEx = (1, Cons [0] 123 Nil)
+
+
+data Matrix (A : Type) (n : Nat) : Type where
+	Nil of [n = 0]
+	Cons of [m : Nat] [n = Succ m] (Vec A n) (Matrix A m)
+
+
+pairMatrix : Type -> Type
+pairMatrix = \A. {n : Nat | Matrix A n}
+
+
+MatEx : pairMatrix Nat
+MatEx = (0, Nil)
+
+MatEx2 : pairMatrix Nat
+MatEx2 = (1, Cons [0] (Cons [0] 123 Nil) Nil)
+
+MatEx3 : pairMatrix Nat
+MatEx3 = (2, (Cons [1] (Cons [1] 123 (Cons [0] 123 Nil)) (Cons [0] (Cons [0] 123 Nil) (Nil))))
