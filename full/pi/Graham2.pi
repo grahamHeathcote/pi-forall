@@ -74,6 +74,23 @@ data Special (A : Type) : Type where
 
 
 specialTest : Special Nat
-specialTest = special (Succ Zero)
+specialTest = special (Succ Zero) 
 
- 
+
+
+
+equals2 : (n : Nat) -> n = n
+equals2 = \n. Refl
+
+
+data myNewType (A : Type) (B : Type) : Type where
+	somethingNull
+	equals34 of [A = Nat] [B = Nat]
+	bothZero of [A = Nat] [B = Nat] (n : A) [n = Zero]
+
+
+stupidType : myNewType Nat Nat
+stupidType = somethingNull
+
+stupidType2 : myNewType Nat Nat
+stupidType2 = bothZero (Zero)
